@@ -71,7 +71,7 @@ function update($table, $data){
         }
     $sql="UPDATE $table SET ".join(" , ", $tmp)." WHERE id='{$data['id']}'";
     echo $sql;
-    // return $pdo->exec($sql); //會去資料庫執行它
+    return $pdo->exec($sql); //會去資料庫執行它
 }
 
 function insert($table, $data){
@@ -81,6 +81,16 @@ function insert($table, $data){
     $sql="INSERT INTO $table (`".join("`,`", $keys)."`) values('".join("','", $data)."');";
     echo $sql;
     return $pdo->exec($sql);
+}
+
+// 合併update() & insert()
+// 如果$data 有id欄位且不為空，執行update，否則執行 insert
+function save($table, $data){
+    if(isset($data['id'])){
+        update($table, $data);
+    }else{
+        insert($table, $data);
+    }
 }
 
 ?>

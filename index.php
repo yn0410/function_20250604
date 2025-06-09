@@ -37,7 +37,13 @@ dd($row);
 
 update("items", $row); */
 
-$data=['name'=>'1+1', 'cost'=>50, 'stock'=>100, 'price'=>75];
+/* $data=['name'=>'1+1', 'cost'=>50, 'stock'=>100, 'price'=>75];
+insert("items", $data); */
 
-insert("items", $data);
+
+/* $data=['name'=>'豬排鐵板麵', 'cost'=>65, 'stock'=>30, 'price'=>85];
+save("items", $data); */
+
+$data=['id'=>10,'name'=>'豬排鐵板麵加蛋', 'cost'=>75, 'stock'=>30, 'price'=>105];
+save("items", $data);
 ?>
