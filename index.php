@@ -14,15 +14,15 @@ stars('矩形', 15);
 stars('倒三角形', 15);
  */
 
-$rows=all('sales');
+/* $rows=all('sales');
 dd($rows);
 
 $sales=all('sales', "where quantity >=2");
 dd($sales);
 
 $all=q("select name, price from items order by price");
-dd($all);
+dd($all); */
 
-/* $id=find('salse', '1');
-dd($id); */
+
+dd(find('items', 3));
 ?>

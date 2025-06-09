@@ -27,12 +27,10 @@ function q($sql){
 }
 
 function find($table, $id){
-    // global $pdo;
-    // $sql="SELECT * FROM $table WHERE id=$id";
-    // echo $sql;
-    // $rows=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
-
-    // return $rows;
+    global $pdo;
+    $sql="SELECT * FROM $table WHERE id='$id'";
+    echo $sql;
+    return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>
