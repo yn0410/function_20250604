@@ -20,4 +20,9 @@ dd($rows);
 $sales=all('sales', "where quantity >=2");
 dd($sales);
 
+$all=q("select name, price from items order by price");
+dd($all);
+
+/* $id=find('salse', '1');
+dd($id); */
 ?>
