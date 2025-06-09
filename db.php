@@ -8,13 +8,38 @@ update()-給定資料表的條件後，會去更新相應的資料。
 insert()-給定資料內容後，會去新增資料到資料表
 del()-給定條件後，會去刪除指定的資料 */
 
-function all($table, $where=null){ //"參數=null"表示預設值=null，呼叫函式時，可寫可不寫這個參數，不寫加此參數就是預設值去呼叫此function
+/* 修改all()
+all($table);
+all($table,$array=[]);
+all($table,$array,$str);
+all($table,$str); */
+
+/* function all($table, $where=null){ //"參數=null"表示預設值=null，呼叫函式時，可寫可不寫這個參數，不寫加此參數就是預設值去呼叫此function
     // echo "回傳資料表 $table 的所有資料";
     global $pdo;
     $sql="SELECT * FROM $table $where";
     echo $sql;
     $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+    return $rows;
+} */
+
+function all($table, $array=null, $str=null){
+    global $pdo;
+    $sql="SELECT * FROM $table ";
+
+    
+        if(is_array($array)){
+            $tmp=arr2sql($array);
+            $sql=$sql ." WHERE ".join(" AND ", $tmp);
+        }else{
+            $sql .=$array;
+        }
+        $sql .=$str;
+    
+
+    echo $sql;
+    $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
 }
 
@@ -73,7 +98,7 @@ function update($table, $data){
             }
         } */
     $tmp=arr2sql($data);
-    
+
     $sql="UPDATE $table SET ".join(" , ", $tmp)." WHERE id='{$data['id']}'";
     echo $sql;
     return $pdo->exec($sql); //會去資料庫執行它

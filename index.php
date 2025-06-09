@@ -44,6 +44,20 @@ insert("items", $data); */
 /* $data=['name'=>'豬排鐵板麵', 'cost'=>65, 'stock'=>30, 'price'=>85];
 save("items", $data); */
 
-$data=['id'=>10,'name'=>'豬排鐵板麵加蛋', 'cost'=>75, 'stock'=>30, 'price'=>105];
-save("items", $data);
+/* $data=['id'=>10,'name'=>'豬排鐵板麵加蛋', 'cost'=>75, 'stock'=>30, 'price'=>105];
+save("items", $data); */
+
+
+
+/* $rows=all('sales');
+dd($rows); */
+
+/* $rows=all('sales', "where quantity >=2");
+dd($rows); */
+
+/* $rows=all('sales', ['quantity'>=2]);
+dd($rows); */
+
+$rows=all('sales', ['quantity'=>2], 'Order by id desc');
+dd($rows);
 ?>
