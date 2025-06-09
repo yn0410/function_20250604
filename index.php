@@ -24,6 +24,16 @@ $all=q("select name, price from items order by price");
 dd($all); */
 
 
-dd(find('items', 3));
-dd(find('items', ['name'=>'蛋餅','stock'=>55]));
+/* dd(find('items', 3));
+dd(find('items', ['name'=>'蛋餅','stock'=>55])); */
+
+$row=find('items', 5);
+dd($row);
+
+$row['cost']=15;
+$row['price']=45;
+
+dd($row);
+
+update("items", $row);
 ?>

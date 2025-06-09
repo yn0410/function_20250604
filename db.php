@@ -3,7 +3,8 @@ $dsn="mysql:host=localhost;dbname=store;charset=utf8";
 $pdo=new PDO($dsn,'root','');
 
 /* all()-給定資料表名後，會回傳整個資料表的資料
-find()-會回傳資料表指定id的資料 */
+find()-會回傳資料表指定id的資料
+update()-給定資料表的條件後，會去更新相應的資料。 */
 
 function all($table, $where=null){ //"參數=null"表示預設值=null，呼叫函式時，可寫可不寫這個參數，不寫加此參數就是預設值去呼叫此function
     // echo "回傳資料表 $table 的所有資料";
@@ -40,6 +41,37 @@ function find($table, $id){
     }
     echo $sql;
     return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+}
+
+function update($table, $data){
+    global $pdo;
+    /* $data=[`id`=>5,
+            `name`=>'蘿蔔糕',
+            `cost`=>'12',
+            `stock`=>'100',
+            `price`=>'35'
+    ];
+    $data['price']=40;
+    $data=[`id`=>5,
+            `name`=>'蘿蔔糕',
+            `cost`=>'12',
+            `stock`=>'100',
+            `price`=>'40'
+    ];
+    $sql="UPDATE $table SET [`name`=>'xxx',
+                            `cost`=>'yyy',
+                            `stock`=>'zzz',
+                            `price`=>'aaa']
+                        WHERE id='{$id['id']}'"; */
+    $tmp=[];
+        foreach($data as $key=>$value){
+            if($key!='id'){
+                $tmp[]="`$key`='$value'";
+            }
+        }
+    $sql="UPDATE $table SET ".join(" , ", $tmp)." WHERE id='{$data['id']}'";
+    echo $sql;
+    // return $pdo->exec($sql); //會去資料庫執行它
 }
 
 ?>
