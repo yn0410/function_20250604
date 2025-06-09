@@ -58,6 +58,9 @@ dd($rows); */
 /* $rows=all('sales', ['quantity'>=2]);
 dd($rows); */
 
-$rows=all('sales', ['quantity'=>2], 'Order by id desc');
-dd($rows);
+/* $rows=all('sales', ['quantity'=>2], 'Order by id desc');
+dd($rows); */
+
+del('items', ['cost'=>50]);
+
 ?>

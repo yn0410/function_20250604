@@ -131,4 +131,19 @@ function arr2sql($array){ //function 名稱"array to sql"
     return $tmp;
 }
 
+function del($table, $id){
+    global $pdo;
+    $sql="DELETE FROM $table WHERE ";
+
+    if(is_array($id)){
+        $tmp=arr2sql($id);
+        $sql.=join(" AND ", $tmp);
+    }else{
+        $sql.= "id='$id'";
+    }
+    echo $sql;
+    return $pdo->exec($sql);
+}
+
+
 ?>
