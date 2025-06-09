@@ -74,4 +74,13 @@ function update($table, $data){
     // return $pdo->exec($sql); //會去資料庫執行它
 }
 
+function insert($table, $data){
+    global $pdo;
+    $keys=array_keys($data);
+
+    $sql="INSERT INTO $table (`".join("`,`", $keys)."`) values('".join("','", $data)."');";
+    echo $sql;
+    return $pdo->exec($sql);
+}
+
 ?>
