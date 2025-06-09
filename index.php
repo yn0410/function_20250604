@@ -17,4 +17,7 @@ stars('倒三角形', 15);
 $rows=all('sales');
 dd($rows);
 
+$sales=all('sales', "where quantity >=2");
+dd($sales);
+
 ?>
