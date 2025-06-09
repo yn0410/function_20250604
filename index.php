@@ -1,7 +1,7 @@
 <?php //include 'library.php'; ?>
 <?php include 'db.php'; ?>
 <!-- <h3>用*畫圖</h3> -->
-<h3>拿到資料表所有資料</h3>
+<h3>拿到資料表的資料</h3>
 <style>
     *{
        font-family:'Courier New', Courier, monospace;
@@ -25,4 +25,5 @@ dd($all); */
 
 
 dd(find('items', 3));
+dd(find('items', ['name'=>'蛋餅','stock'=>55]));
 ?>

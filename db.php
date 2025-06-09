@@ -28,7 +28,16 @@ function q($sql){
 
 function find($table, $id){
     global $pdo;
-    $sql="SELECT * FROM $table WHERE id='$id'";
+
+    if(is_array($id)){
+        $tmp=[];
+        foreach($id as $key=>$value){
+            $tmp[]="`$key`='$value'";
+        }
+        $sql="SELECT * FROM $table WHERE ".join(" AND ", $tmp);
+    }else{
+        $sql="SELECT * FROM $table WHERE id='$id'";
+    }
     echo $sql;
     return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 }
