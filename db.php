@@ -4,7 +4,9 @@ $pdo=new PDO($dsn,'root','');
 
 /* all()-給定資料表名後，會回傳整個資料表的資料
 find()-會回傳資料表指定id的資料
-update()-給定資料表的條件後，會去更新相應的資料。 */
+update()-給定資料表的條件後，會去更新相應的資料。
+insert()-給定資料內容後，會去新增資料到資料表
+del()-給定條件後，會去刪除指定的資料 */
 
 function all($table, $where=null){ //"參數=null"表示預設值=null，呼叫函式時，可寫可不寫這個參數，不寫加此參數就是預設值去呼叫此function
     // echo "回傳資料表 $table 的所有資料";
@@ -31,10 +33,11 @@ function find($table, $id){
     global $pdo;
 
     if(is_array($id)){
-        $tmp=[];
+        /* $tmp=[];
         foreach($id as $key=>$value){
             $tmp[]="`$key`='$value'";
-        }
+        } */
+       $tmp=arr2sql($id);
         $sql="SELECT * FROM $table WHERE ".join(" AND ", $tmp);
     }else{
         $sql="SELECT * FROM $table WHERE id='$id'";
@@ -63,12 +66,14 @@ function update($table, $data){
                             `stock`=>'zzz',
                             `price`=>'aaa']
                         WHERE id='{$id['id']}'"; */
-    $tmp=[];
+    /* $tmp=[];
         foreach($data as $key=>$value){
             if($key!='id'){
                 $tmp[]="`$key`='$value'";
             }
-        }
+        } */
+    $tmp=arr2sql($data);
+    
     $sql="UPDATE $table SET ".join(" , ", $tmp)." WHERE id='{$data['id']}'";
     echo $sql;
     return $pdo->exec($sql); //會去資料庫執行它
@@ -91,6 +96,14 @@ function save($table, $data){
     }else{
         insert($table, $data);
     }
+}
+
+function arr2sql($array){ //function 名稱"array to sql"
+    $tmp=[];
+    foreach($array as $key=>$value){
+            $tmp[]="`$key`='$value'";
+    }
+    return $tmp;
 }
 
 ?>
